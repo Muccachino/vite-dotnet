@@ -69,10 +69,19 @@ namespace ContosoUniversityBackend.Controllers
                 return BadRequest();
             }
 
-            var studentDB = await _context.Students.FirstOrDefaultAsync(x => x.ID == student.ID);
-            _mapper.Map<EditStudentDto, Student>(student, studentDB);
-            _context.Entry(student).State = EntityState.Modified;
+            var studentDB = await _context.Students
+                .Include(x => x.Enrollments)
+                    .ThenInclude(x => x.Course)
+                .FirstOrDefaultAsync(x => x.ID == student.ID);
 
+            if (studentDB == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map<EditStudentDto, Student>(student, studentDB);
+            //_context.Entry(student).State = EntityState.Modified;
+            _context.Students.Update(studentDB);
+            
             try
             { 
                 await _context.SaveChangesAsync();

@@ -15,7 +15,7 @@ export default function AboutPage() {
 
   useEffect(() => {
     const connectTest = async () => {
-      const response = await axios.get('https://localhost:44395/api/Enrollments/DateGroup');
+      const response = await axios.get('https://localhost:7088/api/Enrollments/DateGroup');
       setTest(response.data);
     }
     connectTest();

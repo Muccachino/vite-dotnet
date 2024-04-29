@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import RootElement from "./components/RootElement.tsx";
 import StudentIndex from "./components/Students/StudentIndex.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
@@ -31,10 +31,6 @@ export default function Router() {
       path: "/app",
       element: <RootElement />,
       errorElement: <ErrorPage />,
-    },
-    {
-      path: "/about",
-      element: <AboutPage/>
     },
     {
       path: "/students",
@@ -122,7 +118,11 @@ export default function Router() {
       path: "departmentDetails/:id",
       element: <DepartmentDetails/>,
       loader: departmentDetailsLoader as any
-    }
+    },
+    {
+      path: "/about",
+      element: <AboutPage/>
+    },
   ]);
   return <RouterProvider router={router} />;
 }

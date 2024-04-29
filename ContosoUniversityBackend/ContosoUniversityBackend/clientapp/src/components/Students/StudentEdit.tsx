@@ -7,10 +7,7 @@ import {IEnrollment, IStudent} from "../../interfaces/global_interfaces.ts";
 import  {useState} from "react";
 import Table from "@mui/joy/Table";
 import {
-  FormControl,
   IconButton,
-  MenuItem,
-  Select,
   TableBody,
   TableCell,
   TableHead,
@@ -29,6 +26,11 @@ export default function StudentEdit() {
   const {student} = useLoaderData() as {student: IStudent};
   const [,editStudents] = useStudents()
   const [currentStudent, setCurrentStudent] = useState<IStudent>(student);
+
+  function handleDeleteCourse(id: number) {
+    const newCourses = currentStudent.enrollments!.filter(x => x.enrollmentID !== id);
+    setCurrentStudent(prevState => ({...prevState, enrollments: newCourses}))
+  }
 
   return (
     <>
@@ -64,26 +66,9 @@ export default function StudentEdit() {
                   return(
                     <TableRow key={index}>
                       <TableCell>{item.course?.title}</TableCell>
+                      <TableCell>{item.gradeString}</TableCell>
                       <TableCell>
-                        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                          <Select
-                            labelId="demo-select-small-label"
-                            id="demo-select-small"
-                            value={item.grade}
-                            onChange={(e) => {
-                              console.log(e.target.value);
-                              setCurrentStudent(prevState => ({...prevState, grade: (e.target.value)}))}}
-                          >
-                            <MenuItem value={0}>A</MenuItem>
-                            <MenuItem value={1}>B</MenuItem>
-                            <MenuItem value={2}>C</MenuItem>
-                            <MenuItem value={3}>D</MenuItem>
-                            <MenuItem value={4}>F</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </TableCell>
-                      <TableCell>
-                        <IconButton aria-label="delete" size="large">
+                        <IconButton aria-label="delete" size="large" onClick={() => handleDeleteCourse(item.enrollmentID)}>
                           <DeleteIcon fontSize="inherit" />
                         </IconButton>
                       </TableCell>
