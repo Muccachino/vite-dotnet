@@ -18,8 +18,8 @@ export default function DepartmentCreate() {
   const [currentDepartment, setCurrentDepartment] = useState<IDepartment>({
     name: "",
     startDate: "2024-01-01",
-    administrator: null,
-    budget: 0
+    budget: 0,
+    instructorID: 0,
   });
 
   return (
@@ -34,20 +34,21 @@ export default function DepartmentCreate() {
         <div style={{ height: "250px", width: "30vw", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
           <Divider sx={{marginBottom: "20px"}}/>
 
-          <FormLabel>DepartmentName</FormLabel>
+          <FormLabel>Department Name</FormLabel>
           <Input onChange={(e) => setCurrentDepartment(prevState => ({...prevState, name: (e.target.value)}))}/>
           <FormLabel>Administrator</FormLabel>
           <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth size={"small"} >
+            <FormControl fullWidth>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                label="Administrator"
-                onChange={(e) => setCurrentDepartment(prevState => ({...prevState, administrator: (instructors[(e.target.value) as number])}))}
+                size={"small"}
+                value={currentDepartment.instructorID}
+                onChange={(e) => setCurrentDepartment(prevState => ({...prevState, InstructorId: parseInt(e.target.value as string)}))}
               >
-                {(instructors as IInstructor[]).map((instructor, index) => {
-                  return(
-                    <MenuItem value={index}>{instructor.fullName}</MenuItem>
+                {instructors.map((instructor, index) => {
+                  return (
+                    <MenuItem key={index} value={instructor.id}>{instructor.firstMidName + " " + instructor.lastName}</MenuItem>
                   )
                 })}
               </Select>

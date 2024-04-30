@@ -12,5 +12,6 @@ public class StudentMappingProfile : Profile
         CreateMap<Student, GetSingleStudentDto>().ReverseMap();
         CreateMap<Student, EditStudentDto>().ReverseMap();
         CreateMap<Student, StudentNameOnlyDto>().ReverseMap();
+        CreateMap<Student, CreateStudentDto>().ReverseMap();
     }
 }

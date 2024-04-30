@@ -72,15 +72,39 @@ namespace ContosoUniversityBackend.Controllers
         // PUT: api/Instructors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInstructor(int id, Instructor instructor)
+        public async Task<IActionResult> PutInstructor(int id, InstructorEditDto instructor)
         {
             if (id != instructor.ID)
             {
                 return BadRequest();
             }
+            //_context.Entry(instructor).State = EntityState.Modified;
 
-            _context.Entry(instructor).State = EntityState.Modified;
+            var instructorDB = await _context.Instructors
+                .Include(x => x.CourseAssignments)
+                    .ThenInclude(y => y.Course)
+                .Include(x => x.OfficeAssignment)
+                .FirstOrDefaultAsync(x => x.ID == id);
 
+            if (instructorDB == null)
+            {
+                return NotFound();
+            }
+            
+            if (instructor.CourseIds.Any())
+            {
+                var courseAssignemnts = new List<CourseAssignment>();
+                foreach (var courseId in instructor.CourseIds)
+                {
+                    courseAssignemnts.Add(new CourseAssignment{Instructor = instructorDB, CourseID = courseId});
+                }
+
+                instructorDB.CourseAssignments = courseAssignemnts;
+            }
+
+            _mapper.Map<InstructorEditDto, Instructor>(instructor, instructorDB);
+            _context.Instructors.Update(instructorDB);
+            
             try
             {
                 await _context.SaveChangesAsync();
@@ -103,8 +127,22 @@ namespace ContosoUniversityBackend.Controllers
         // POST: api/Instructors
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Instructor>> PostInstructor(Instructor instructor)
+        public async Task<ActionResult<Instructor>> PostInstructor(InstructorCreateDto instructorDto)
         {
+            var instructor = new Instructor();
+
+            if (instructorDto.CourseIds.Any())
+            {
+                var courseAssignemnts = new List<CourseAssignment>();
+                foreach (var courseId in instructorDto.CourseIds)
+                {
+                    courseAssignemnts.Add(new CourseAssignment{Instructor = instructor, CourseID = courseId});
+                }
+
+                instructor.CourseAssignments = courseAssignemnts;
+            }
+
+            _mapper.Map<InstructorCreateDto, Instructor>(instructorDto, instructor);
             _context.Instructors.Add(instructor);
             await _context.SaveChangesAsync();
 

@@ -19,9 +19,9 @@ export default function InstEnrollments({course}: Params) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {course.enrollments!.map(student => {
+          {course.enrollments!.map((student, index) => {
             return(
-              <TableRow key={student.studentID}>
+              <TableRow key={index}>
                 <TableCell>{student.student!.firstMidName} {student.student!.lastName}</TableCell>
                 <TableCell>{student.gradeString}</TableCell>
               </TableRow>

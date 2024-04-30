@@ -11,7 +11,6 @@ export async function loader({params}: {params: {id: string}}) {
   return {department};
 }
 
-//TODO: Test Delete function, when creating is possible
 
 export default function DepartmentDelete() {
   const {department} = useLoaderData() as {department: IDepartment};

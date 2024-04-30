@@ -106,12 +106,8 @@ namespace ContosoUniversityBackend.Controllers
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(CreateStudentDto dto)
         {
-            var student = new Student
-            {
-                LastName = dto.LastName,
-                FirstMidName = dto.FirstMidName,
-                EnrollmentDate = dto.EnrollmentDate,
-            };
+            var student = new Student();
+
             if (dto.CourseIds.Any())
             {
                 var enrollments = new List<Enrollment>();
@@ -119,11 +115,10 @@ namespace ContosoUniversityBackend.Controllers
                 {
                     enrollments.Add(new Enrollment{ Student = student, CourseID = courseId});
                 }
-
                 student.Enrollments = enrollments;
             }
-           
 
+            _mapper.Map<CreateStudentDto, Student>(dto, student);
             _context.Students.Add(student);
             await _context.SaveChangesAsync();
 

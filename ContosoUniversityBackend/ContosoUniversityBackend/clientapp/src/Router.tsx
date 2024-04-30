@@ -21,6 +21,7 @@ import DepartmentIndex from "./components/Departments/DepartmentIndex.tsx";
 import DepartmentCreate from "./components/Departments/DepartmentCreate.tsx";
 import DepartmentDelete, {loader as departmentDeleteLoader} from "./components/Departments/DepartmentDelete.tsx";
 import DepartmentDetails, {loader as departmentDetailsLoader} from "./components/Departments/DepartmentDetails.tsx";
+import DepartmentEdit, {loader as departmentEditLoader} from "./components/Departments/DepartmentEdit.tsx";
 
 
 export default function Router() {
@@ -123,6 +124,11 @@ export default function Router() {
       path: "/about",
       element: <AboutPage/>
     },
+    {
+      path: "/departmentEdit/:id",
+      element: <DepartmentEdit/>,
+      loader: departmentEditLoader as any
+    }
   ]);
   return <RouterProvider router={router} />;
 }

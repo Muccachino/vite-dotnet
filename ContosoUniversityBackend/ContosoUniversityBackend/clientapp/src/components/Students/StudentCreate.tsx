@@ -14,7 +14,7 @@ export default function StudentCreate() {
   const [,,addStudent] = useStudents()
   const [courses] = useCourses() as [courses: ICourse[]];
   const [selectedCourses, setSelectedCourses] = useState<number[]>([])
-  const [currentStudent, setCurrentStudent] = useState<IStudent>({ firstMidName: "", lastName: "", enrollmentDate: "2024-01-01", courseIds: selectedCourses});
+  const [currentStudent, setCurrentStudent] = useState<IStudent>({ firstMidName: "", lastName: "", enrollmentDate: "2024-01-01", courseIds: []});
 
   function handleCourseCheckboxes(checked: boolean ,courseID: number) {
     if(checked) {
@@ -32,6 +32,7 @@ export default function StudentCreate() {
       }
       setStudent();
     }, [selectedCourses])
+
 
   return (
     <>

@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ContosoUniversityBackend.DTO.Course;
-using ContosoUniversityBackend.DTO.Instructor;
 
 namespace ContosoUniversityBackend.DTO.Department;
 
-public class DepartmentDetailsDto
+public class DepartmentEditDto
 {
     public int DepartmentID { get; set; }
 
@@ -15,16 +13,11 @@ public class DepartmentDetailsDto
     [DataType(DataType.Currency)]
     [Column(TypeName = "money")]
     public decimal Budget { get; set; }
-    
+
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     [Display(Name = "Start Date")]
     public DateTime StartDate { get; set; }
-    
-    public int? InstructorID { get; set; }
 
-    
-    public InstructorNameOnlyDto Administrator { get; set; }
-    
-    public ICollection<CoursesStudentAmountDto> Courses { get; set; }
+    public int? InstructorID { get; set; }
 }

@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ContosoUniversityBackend.DTO.CourseAssignment;
 using ContosoUniversityBackend.DTO.OfficeAssignment;
 
 namespace ContosoUniversityBackend.DTO.Instructor;
 
-public class InstructorDetailsDto
+public class InstructorEditDto
 {
     public int ID { get; set; }
 
@@ -24,9 +23,7 @@ public class InstructorDetailsDto
     [Display(Name = "Hire Date")]
     public DateTime HireDate { get; set; }
     
-    
-    public ICollection<CA_CoursesOnlyDto>? CourseAssignments { get; set; }
-    
+    public List<int> CourseIds { get; set; }
     
     public OA_OfficeLocationOnlyDto? OfficeAssignment { get; set; }
 }

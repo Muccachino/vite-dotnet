@@ -32,9 +32,9 @@ export default function InstCourses({courseAssignments}: Params) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {courseAssignments.map(item => {
+          {courseAssignments.map((item, index) => {
             return(
-              <TableRow key={item.courseID}>
+              <TableRow key={index}>
                 <TableCell>
                   <Button variant="text" onClick={() => showCourse(item.course)}>Select</Button>
                 </TableCell>

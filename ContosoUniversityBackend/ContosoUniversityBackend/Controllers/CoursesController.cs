@@ -65,14 +65,18 @@ namespace ContosoUniversityBackend.Controllers
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(int id, Course course)
+        public async Task<IActionResult> PutCourse(int id, CourseEditDto course)
         {
             if (id != course.CourseID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(course).State = EntityState.Modified;
+            var courseDB = await _context.Courses.FirstOrDefaultAsync(x => x.CourseID == id);
+
+            _mapper.Map<CourseEditDto, Course>(course, courseDB);
+            _context.Courses.Update(courseDB);
+            //_context.Entry(course).State = EntityState.Modified;
             
             try
             {
@@ -96,8 +100,11 @@ namespace ContosoUniversityBackend.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<Course>> PostCourse(CourseCreateDto courseDto)
         {
+
+            var course = new Course();
+            _mapper.Map<CourseCreateDto, Course>(courseDto, course);
             _context.Courses.Add(course);
             try
             {

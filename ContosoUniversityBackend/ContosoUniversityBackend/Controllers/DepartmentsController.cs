@@ -65,15 +65,19 @@ namespace ContosoUniversityBackend.Controllers
         // PUT: api/Departments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDepartment(int id, Department department)
+        public async Task<IActionResult> PutDepartment(int id, DepartmentEditDto department)
         {
             if (id != department.DepartmentID)
             {
                 return BadRequest();
             }
+            //_context.Entry(department).State = EntityState.Modified;
 
-            _context.Entry(department).State = EntityState.Modified;
+            var departmentDB = await _context.Departments.FirstOrDefaultAsync(x => x.DepartmentID == id);
 
+            _mapper.Map<DepartmentEditDto, Department>(department, departmentDB);
+            _context.Departments.Update(departmentDB);
+            
             try
             {
                 await _context.SaveChangesAsync();
@@ -96,8 +100,11 @@ namespace ContosoUniversityBackend.Controllers
         // POST: api/Departments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Department>> PostDepartment(Department department)
+        public async Task<ActionResult<Department>> PostDepartment(DepartmentCreateDto departmentDto)
         {
+            var department = new Department();
+
+            _mapper.Map<DepartmentCreateDto, Department>(departmentDto, department);
             _context.Departments.Add(department);
             await _context.SaveChangesAsync();
 

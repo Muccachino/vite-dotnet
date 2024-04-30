@@ -19,7 +19,11 @@ export default function CourseEdit() {
   const {course} = useLoaderData() as {course: ICourse};
   const [,editCourses] = useCourses()
   const [departments] = useDepartments()
-  const [currentCourse, setCurrentCourse] = useState<ICourse>(course);
+  const [currentCourse, setCurrentCourse] = useState<{
+    courseID: number,
+    title: string,
+    credits: number,
+    departmentID?: number}>({courseID: course.courseID, title: course.title, credits: course.credits, departmentID: course.departmentID});
 
   return (
     <>
@@ -44,7 +48,7 @@ export default function CourseEdit() {
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               name="radio-buttons-group"
-              defaultValue={course.departmentID}
+              value={currentCourse.departmentID}
               onChange={(e) => setCurrentCourse(prevState => ({...prevState, departmentID: parseInt(e.target.value)}))}
             >
               {(departments as IDepartment[]).map(department => {

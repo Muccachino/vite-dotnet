@@ -25,6 +25,7 @@ namespace ContosoUniversityBackend.Models
                 return FirstMidName + " " + LastName;
             }
         }
+        
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Hire Date")]

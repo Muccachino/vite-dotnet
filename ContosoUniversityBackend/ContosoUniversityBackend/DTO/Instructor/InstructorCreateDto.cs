@@ -5,10 +5,8 @@ using ContosoUniversityBackend.DTO.OfficeAssignment;
 
 namespace ContosoUniversityBackend.DTO.Instructor;
 
-public class InstructorDetailsDto
+public class InstructorCreateDto
 {
-    public int ID { get; set; }
-
     [Required]
     [StringLength(50)]
     [Display(Name = "Last Name")]
@@ -24,9 +22,9 @@ public class InstructorDetailsDto
     [Display(Name = "Hire Date")]
     public DateTime HireDate { get; set; }
     
-    
-    public ICollection<CA_CoursesOnlyDto>? CourseAssignments { get; set; }
-    
+    public List<int> CourseIds { get; set; }
     
     public OA_OfficeLocationOnlyDto? OfficeAssignment { get; set; }
+
+
 }

@@ -68,9 +68,9 @@ export default function InstructorIndex() {
                   <TableCell>{instructor.hireDate.slice(0,10)}</TableCell>
                   <TableCell>{instructor.officeAssignment?.location}</TableCell>
                   <TableCell>
-                    {instructor.courseAssignments?.map(course => {
+                    {instructor.courseAssignments?.map((course, index) => {
                       return(
-                        <p key={course.courseID}>
+                        <p key={index}>
                           <span>{course.courseID} </span> <span> {course.course.title}</span>
                         </p>
                       )

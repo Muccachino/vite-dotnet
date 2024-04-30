@@ -36,6 +36,7 @@ export interface IInstructor {
   hireDate: string;
   courseAssignments?: ICourseAssignment[] | null;
   officeAssignment?: IOfficeAssignment | null;
+  courseIds?: number[];
 }
 
 export interface IDepartment {
@@ -43,8 +44,8 @@ export interface IDepartment {
   name: string;
   budget: number;
   startDate: string;
-  InstructorId?: number;
-  administrator: IInstructor | null;
+  instructorID?: number;
+  administrator?: IInstructor | null;
   courses?: ICourse[];
 }
 
@@ -61,7 +62,7 @@ export interface ICourseAssignment {
 }
 
 export interface IOfficeAssignment {
-  instructorID: number;
+  instructorID?: number;
   location: string;
-  instructor: IInstructor;
+  instructor?: IInstructor;
 }

@@ -17,10 +17,7 @@ export default function CourseCreate() {
     courseID: 0,
     title: "",
     credits: 0,
-    departmentID: 1,
-    enrollments: [],
-    department: null,
-    courseAssignments: null
+    departmentID: 0
     });
 
   return (
