@@ -1,10 +1,10 @@
 import Header from "../Header.tsx";
 import Footer from "../Footer.tsx";
-import {Button, Divider, FormLabel, Input} from "@mui/joy";
+import {Button, Divider, FormLabel} from "@mui/joy";
 import {Link, useLoaderData, useNavigate} from "react-router-dom";
 import { IDepartment, IInstructor} from "../../interfaces/global_interfaces.ts";
-import  {useState} from "react";
-import {Box, FormControl, MenuItem, Select} from "@mui/material";
+import {ChangeEvent, useState} from "react";
+import {Box, FormControl, MenuItem, TextField} from "@mui/material";
 import useDepartments, {getSingleDepartment} from "../../useData/useDepartments.ts";
 import useInstructors from "../../useData/useInstructors.ts";
 
@@ -25,6 +25,43 @@ export default function DepartmentEdit() {
     startDate: department.startDate,
     budget: department.budget,
     instructorID: department.instructorID});
+  const [nameError, setNameError] = useState<boolean>(false);
+  const [budgetError, setBudgetError] = useState<boolean>(false);
+  const [dateError, setDateError] = useState<boolean>(false);
+  const [updateError, setUpdateError] = useState<boolean>(false);
+
+  function handleNameChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    setUpdateError(false);
+    setCurrentDepartment(prevState => ({...prevState, name: (e.target.value)}))
+    e.target.validity.valid ? setNameError(false) : setNameError(true);
+  }
+
+  function handleBudgetChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
+    setUpdateError(false);
+    setCurrentDepartment(prevState => ({...prevState, budget: parseInt(e.target.value)}))
+    e.target.validity.valid ? setBudgetError(false) : setBudgetError(true);
+  }
+
+  function handleDateChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
+    setUpdateError(false);
+    setCurrentDepartment(prevState => ({...prevState, startDate: (e.target.value)}))
+    e.target.validity.valid ? setDateError(false) : setDateError(true);
+  }
+
+  function handleSubmit(){
+    if(!nameError && !budgetError &&
+      !dateError &&
+      currentDepartment.name !== "" &&
+      currentDepartment.instructorID !== 0 &&
+      currentDepartment.budget !== 0 &&
+      currentDepartment.startDate !== ""){
+      (editDepartment as (departmentToEdit: IDepartment) => Promise<void>)(currentDepartment);
+      navigate("/departments")
+    } else {
+      setUpdateError(true);
+    }
+  }
+
 
   return (
     <>
@@ -39,13 +76,21 @@ export default function DepartmentEdit() {
           <Divider sx={{marginBottom: "20px"}}/>
 
           <FormLabel>Department Name</FormLabel>
-          <Input value={currentDepartment.name} onChange={(e) => setCurrentDepartment(prevState => ({...prevState, name: (e.target.value)}))}/>
+          <TextField
+            value={currentDepartment.name}
+            hiddenLabel
+            size={"small"}
+            variant="outlined"
+            required
+            onChange={(e) => handleNameChange(e)}
+            error={nameError}
+            helperText={nameError ? "Please enter your name (letters and spaces only)" : ""}
+            inputProps={{pattern: "[A-Za-z ]+",}}/>
           <FormLabel>Administrator</FormLabel>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+              <TextField
+                select
                 size={"small"}
                 value={currentDepartment.instructorID}
                 onChange={(e) => setCurrentDepartment(prevState => ({...prevState, instructorID: parseInt(e.target.value as string)}))}
@@ -55,20 +100,36 @@ export default function DepartmentEdit() {
                     <MenuItem key={index} value={instructor.id}>{instructor.firstMidName + " " + instructor.lastName}</MenuItem>
                   )
                 })}
-              </Select>
+              </TextField>
             </FormControl>
           </Box>
           <FormLabel>Budget</FormLabel>
-          <Input value={currentDepartment.budget} onChange={(e) => setCurrentDepartment(prevState => ({...prevState, budget: parseInt(e.target.value)}))}/>
+          <TextField
+            value={currentDepartment.budget}
+            hiddenLabel
+            size={"small"}
+            variant="outlined"
+            required
+            onChange={(e) => handleBudgetChange(e)}
+            error={budgetError}
+            helperText={budgetError ? "Numbers Only!" : ""}
+            inputProps={{pattern: "^[0-9]{1,45}$",}}/>
           <FormLabel>Implementation</FormLabel>
-          <Input type={"date"} value={currentDepartment.startDate.slice(0,10)} onChange={(e) => setCurrentDepartment(prevState => ({...prevState, startDate: (e.target.value)}))}/>
+          <TextField
+            type={"date"}
+            value={currentDepartment.startDate.slice(0,10)}
+            required
+            size={"small"}
+            onChange={(e) => handleDateChange(e)}
+            error={dateError}
+            helperText={dateError ? "Please enter a valid date" : ""}/>
         </div>
 
         <div>
-          <Button sx={{marginTop: "30px"}} onClick={() => {
-            (editDepartment as (departmentToEdit: IDepartment) => Promise<void>)(currentDepartment);
-            navigate("/departments")}}>Save</Button>
+          <Button sx={{marginTop: "30px"}} onClick={() => handleSubmit()}>Save</Button>
           <span style={{marginLeft: "30px"}}><Link to={"/departments"}>Back to List</Link></span>
+          {updateError &&
+              <p style={{color: "red", marginTop: "20px"}}>One or more inputs are invalid !</p>}
         </div>
       </div>
       <Footer/>
