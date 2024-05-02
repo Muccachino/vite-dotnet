@@ -84,7 +84,7 @@ export default function DepartmentEdit() {
             required
             onChange={(e) => handleNameChange(e)}
             error={nameError}
-            helperText={nameError ? "Please enter your name (letters and spaces only)" : ""}
+            helperText={nameError ? "Please enter a name (letters and spaces only)" : ""}
             inputProps={{pattern: "[A-Za-z ]+",}}/>
           <FormLabel>Administrator</FormLabel>
           <Box sx={{ minWidth: 120 }}>
