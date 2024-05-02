@@ -6,6 +6,7 @@ namespace ContosoUniversityBackend.Models
     public class Course
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Required]
         [Display(Name = "Number")]
         public int CourseID { get; set; }
 

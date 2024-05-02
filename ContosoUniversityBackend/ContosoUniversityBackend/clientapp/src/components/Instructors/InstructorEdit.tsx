@@ -26,11 +26,11 @@ export default function InstructorEdit() {
   const [hireDateError, setHireDateError] = useState(false);
   const [officeError, setOfficeError] = useState(false);
   const [coursesError, setCoursesError] = useState(false);
-  const [createError, setCreateError] = useState(false);
+  const [updateError, setUpdateError] = useState(false);
 
 
   function handleCourseCheckboxes(checked: boolean ,courseID: number) {
-    setCreateError(false);
+    setUpdateError(false);
     setCoursesError(false);
     if(checked) {
       setSelectedCourses(prevState => [...prevState, courseID]);
@@ -61,25 +61,25 @@ export default function InstructorEdit() {
 
 
   function handleFirstNameChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setCreateError(false);
+    setUpdateError(false);
     setCurrentInstructor(prevState => ({...prevState, firstMidName: (e.target.value)}))
     e.target.validity.valid ? setFirstNameError(false) : setFirstNameError(true);
   }
 
   function handleLastNameChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setCreateError(false);
+    setUpdateError(false);
     setCurrentInstructor(prevState => ({...prevState, lastName: (e.target.value)}))
     e.target.validity.valid ? setLastNameError(false) : setLastNameError(true);
   }
 
   function handleDateChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
-    setCreateError(false);
+    setUpdateError(false);
     setCurrentInstructor(prevState => ({...prevState, hireDate: (e.target.value)}))
     e.target.validity.valid ? setHireDateError(false) : setHireDateError(true);
   }
 
   function handleOfficeChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setCreateError(false);
+    setUpdateError(false);
     setCurrentInstructor(prevState => ({...prevState, officeAssignment: {location:(e.target.value)}}))
     e.target.validity.valid ? setOfficeError(false) : setOfficeError(true);
   }
@@ -106,7 +106,7 @@ export default function InstructorEdit() {
       if (currentInstructor.courseIds!.length === 0){
         setCoursesError(true);
       }
-      setCreateError(true);
+      setUpdateError(true);
     }
   }
 
@@ -180,7 +180,7 @@ export default function InstructorEdit() {
         <div>
           <Button sx={{marginTop: "30px"}} onClick={() => handleSubmit()}>Save</Button>
           <span style={{marginLeft: "30px"}}><Link to={"/instructors"}>Back to List</Link></span>
-          {createError &&
+          {updateError &&
               <p style={{color: "red", marginTop: "20px"}}>One or more inputs are invalid !</p>}
         </div>
       </div>

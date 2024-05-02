@@ -74,8 +74,8 @@ namespace ContosoUniversityBackend.Controllers
 
             var courseDB = await _context.Courses.FirstOrDefaultAsync(x => x.CourseID == id);
 
-            _mapper.Map<CourseEditDto, Course>(course, courseDB);
-            _context.Courses.Update(courseDB);
+            _mapper.Map<CourseEditDto, Course>(course, courseDB!);
+            _context.Courses.Update(courseDB!);
             //_context.Entry(course).State = EntityState.Modified;
             
             try
