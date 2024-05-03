@@ -5,19 +5,21 @@ import Table from "@mui/joy/Table";
 import {TableCell, TableHead, TableRow, TableBody} from "@mui/material";
 import axios from "axios";
 import {useEffect, useState} from "react";
-import {IEnrollmentDateGroup} from "../interfaces/global_interfaces.ts";
+import {ICourse, IEnrollmentDateGroup} from "../interfaces/global_interfaces.ts";
+import useCourses from "../useData/useCourses.ts";
 
 
 
 export default function AboutPage() {
-  const [test, setTest] = useState<IEnrollmentDateGroup[]>([]);
+  const [enrollmentDateGroup, setEnrollmentDateGroup] = useState<IEnrollmentDateGroup[]>([]);
+  const [courses] = useCourses();
 
   useEffect(() => {
-    const connectTest = async () => {
+    const connectEnrollmentDateGroup = async () => {
       const response = await axios.get('https://localhost:7088/api/Enrollments/DateGroup');
-      setTest(response.data);
+      setEnrollmentDateGroup(response.data);
     }
-    connectTest();
+    connectEnrollmentDateGroup();
   }, [])
 
   return (
@@ -31,25 +33,51 @@ export default function AboutPage() {
           </h2>
           <Divider style={{margin: "40px 0"}}/>
         </div>
+        <div className="about-tables">
+          <div>
+            <h3 style={{marginBottom: "20px"}}>Students per Enrollment Date</h3>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Enrollment Date</TableCell>
-              <TableCell>Number of Students</TableCell>
+              <TableCell style={{paddingLeft: "25px"}}>Enrollment Date</TableCell>
+              <TableCell style={{paddingLeft: "25px"}}>Number of Students</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {test.map((t, index) => {
+            {enrollmentDateGroup.map((date, index) => {
               return(
                 <TableRow key={index}>
-                  <TableCell>{t.enrollmentDate.slice(0,10)}</TableCell>
-                  <TableCell>{t.studentCount}</TableCell>
+                  <TableCell style={{paddingLeft: "35px"}}>{date.enrollmentDate.slice(0,10)}</TableCell>
+                  <TableCell style={{paddingLeft: "60px"}}>{date.studentCount}</TableCell>
                 </TableRow>
               )
             })}
 
           </TableBody>
         </Table>
+          </div>
+          <div>
+          <h3 style={{marginBottom: "20px"}}>Students per Course</h3>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell style={{paddingLeft: "25px"}}>Course</TableCell>
+              <TableCell style={{paddingLeft: "25px"}}>Number of Students</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {(courses as ICourse[]).map((course, index) => {
+              return(
+                <TableRow key={index}>
+                  <TableCell style={{paddingLeft: "35px"}}>{course.title}</TableCell>
+                  <TableCell style={{paddingLeft: "60px"}}>{course.enrollments?.length}</TableCell>
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+          </div>
+        </div>
       </div>
 
       <Footer/>

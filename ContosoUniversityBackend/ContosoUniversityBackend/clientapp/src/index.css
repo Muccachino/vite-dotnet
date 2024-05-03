@@ -36,11 +36,31 @@
     margin-top: 70px;
 }
 
+.delete-allInfos {
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+
+}
+
+.delete-infos {
+    display: flex;
+    justify-content: space-around;
+}
+
 .delete-buttons {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-top: 50px;
+}
+
+.about-tables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
 }
 
 .footer {

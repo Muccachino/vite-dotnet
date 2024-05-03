@@ -62,11 +62,11 @@ export default function StudentDetails() {
             <Item style={{textAlign: "start"}}>Enrollments</Item>
           </Grid>
           <Grid xs={10}>
-            <Table>
+            <Table style={{paddingRight: "20vw"}}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Course Title</TableCell>
-                  <TableCell>Grade</TableCell>
+                  <TableCell style={{paddingLeft: "25px"}}>Course Title</TableCell>
+                  <TableCell style={{paddingLeft: "25px"}}>Grade</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -74,8 +74,8 @@ export default function StudentDetails() {
                   (student.enrollments as IEnrollment[]).map((item, index) => {
                   return(
                     <TableRow key={index}>
-                      <TableCell>{item.course?.title}</TableCell>
-                      <TableCell>{item.gradeString}</TableCell>
+                      <TableCell style={{paddingLeft: "30px"}}>{item.course?.title}</TableCell>
+                      <TableCell style={{paddingLeft: "35px"}}>{item.gradeString}</TableCell>
                     </TableRow>
                   )
                 })}

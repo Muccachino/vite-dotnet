@@ -91,6 +91,7 @@ export default function StudentCreate() {
           <FormLabel>First Name</FormLabel>
           <TextField
             hiddenLabel
+            sx={{marginBottom: "15px"}}
             size={"small"}
             variant="outlined"
             required
@@ -102,6 +103,7 @@ export default function StudentCreate() {
           <FormLabel>Last Name</FormLabel>
           <TextField
             hiddenLabel
+            sx={{marginBottom: "15px"}}
             size={"small"}
             variant="outlined"
             required
@@ -113,13 +115,14 @@ export default function StudentCreate() {
           <FormLabel>Enrollment Date</FormLabel>
           <TextField
             required
+            sx={{marginBottom: "15px"}}
             size={"small"}
             type={"date"}
             onChange={(e) => handleDateChange(e)}
             error={enrollmentDateError}
             helperText={enrollmentDateError ? "Please enter a valid date" : ""}/>
 
-          <FormLabel>Courses</FormLabel>
+          <FormLabel sx={{marginBottom: "10px"}}>Courses</FormLabel>
           <FormGroup sx={{display:"grid", gridTemplateColumns: "1fr 1fr"}}>
             {courses.map(course => {
               return <FormControlLabel key={course.courseID} control={<Checkbox onChange={(e) => handleCourseCheckboxes(e.target.checked, course.courseID)}/>} label={course.title} />

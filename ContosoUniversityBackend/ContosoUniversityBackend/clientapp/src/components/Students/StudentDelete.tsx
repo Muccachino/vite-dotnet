@@ -28,13 +28,19 @@ export default function StudentDelete() {
           <h3>Student</h3>
 
           <Divider style={{margin: "40px 0"}}/>
-          <Box>
-            <Typography variant="h6" fontWeight="bold">First Name</Typography>
-            <Typography variant="body1">{student.firstMidName}</Typography>
-            <Typography variant="h6" fontWeight="bold">Last Name</Typography>
-            <Typography variant="body1">{student.lastName}</Typography>
-            <Typography variant="h6" fontWeight="bold">Enrollment Date</Typography>
-            <Typography variant="body1">{student.enrollmentDate.slice(0,10)}</Typography>
+          <Box className="delete-allInfos">
+            <div className="delete-infos">
+              <Typography variant="body1" >First Name:</Typography>
+              <Typography variant="h6" fontWeight="bold">{student.firstMidName}</Typography>
+            </div>
+            <div className="delete-infos">
+              <Typography variant="body1">Last Name:</Typography>
+              <Typography variant="h6" fontWeight="bold">{student.lastName}</Typography>
+            </div>
+            <div className="delete-infos">
+              <Typography variant="body1">Enrollment Date:</Typography>
+              <Typography variant="h6" fontWeight="bold">{student.enrollmentDate.slice(0, 10)}</Typography>
+            </div>
           </Box>
           <div className="delete-buttons">
             <Button onClick={() => {

@@ -31,9 +31,9 @@ export default function StudentIndex() {
         <Table>
           <TableHead>
           <TableRow>
-            <TableCell>First Name</TableCell>
-            <TableCell>Last Name</TableCell>
-            <TableCell>Enrollment Date</TableCell>
+            <TableCell style={{paddingLeft: "25px"}}>First Name</TableCell>
+            <TableCell style={{paddingLeft: "25px"}}>Last Name</TableCell>
+            <TableCell style={{paddingLeft: "25px"}}>Enrollment Date</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -45,9 +45,9 @@ export default function StudentIndex() {
             })
             .map(student => (
             <TableRow key={student.id}>
-              <TableCell>{student.firstMidName}</TableCell>
-              <TableCell>{student.lastName}</TableCell>
-              <TableCell>{student.enrollmentDate.slice(0,10)}</TableCell>
+              <TableCell style={{paddingLeft: "35px"}}>{student.firstMidName}</TableCell>
+              <TableCell style={{paddingLeft: "35px"}}>{student.lastName}</TableCell>
+              <TableCell style={{paddingLeft: "35px"}}>{student.enrollmentDate.slice(0,10)}</TableCell>
               <TableCell>
                 <Link to={`/studentEdit/${student.id}`}>Edit</Link> |
                 <Link to={`/studentDetails/${student.id}`}>Details</Link> |

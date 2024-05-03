@@ -117,12 +117,12 @@ export default function StudentEdit() {
             error={enrollmentDateError}
             helperText={enrollmentDateError ? "Please enter a valid date" : ""}/>
 
-          <FormLabel>Courses</FormLabel>
+          <FormLabel sx={{marginBottom: "15px"}}>Courses</FormLabel>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Course Title</TableCell>
-                <TableCell>Grade</TableCell>
+                <TableCell style={{paddingLeft: "25px"}}>Course Title</TableCell>
+                <TableCell style={{paddingLeft: "25px"}}>Grade</TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
@@ -131,8 +131,8 @@ export default function StudentEdit() {
                 (currentStudent.enrollments as IEnrollment[]).map((item, index) => {
                   return(
                     <TableRow key={index}>
-                      <TableCell>{item.course?.title}</TableCell>
-                      <TableCell>{item.gradeString}</TableCell>
+                      <TableCell style={{paddingLeft: "30px"}}>{item.course?.title}</TableCell>
+                      <TableCell style={{paddingLeft: "35px"}}>{item.gradeString}</TableCell>
                       <TableCell>
                         <IconButton aria-label="delete" size="large" onClick={() => handleDeleteCourse(item.enrollmentID)}>
                           <DeleteIcon fontSize="inherit" />

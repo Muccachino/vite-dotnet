@@ -23,7 +23,7 @@ export default function Header({ headerBackground, headerColor }: Props) {
         padding: "10px"
       }}
       >
-      <Link style={{ fontSize: "1.5rem", color: `${headerColor}` }} className="nav-element" to={"/app"}>
+      <Link style={{ fontSize: "1.5rem", color: `${headerColor}`, textDecoration: "none" }} className="nav-element" to={"/app"}>
         Contoso University
       </Link>
       <Link className="nav-element" style={{color: `${headerColor}`}} to={"/app"}>
