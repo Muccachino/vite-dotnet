@@ -11,7 +11,7 @@ export default function Header({ headerBackground, headerColor }: Props) {
   return (
     <div
       role="presentation"
-      style={{backgroundColor: `${headerBackground}`}}
+      style={{backgroundColor: `${headerBackground}`, borderBottom: "2px solid black"}}
     >
       <div
         style={{

@@ -21,6 +21,10 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // GET: api/Enrollments
+        /// <summary>
+        /// Gets a List of all Enrollments with some nested objects
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EnrollmentDto>>> GetEnrollments()
         {
@@ -29,6 +33,11 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // GET: api/Enrollments/5
+        /// <summary>
+        /// Gets a single Enrollment depending on given ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Enrollment>> GetEnrollment(int id)
         {
@@ -43,7 +52,12 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // PUT: api/Enrollments/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Updates a specific Enrollment in the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="enrollment"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEnrollment(int id, Enrollment enrollment)
         {
@@ -74,7 +88,11 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // POST: api/Enrollments
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Creates a new Enrollment and saves it to the database
+        /// </summary>
+        /// <param name="enrollment"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Enrollment>> PostEnrollment(Enrollment enrollment)
         {
@@ -85,6 +103,11 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // DELETE: api/Enrollments/5
+        /// <summary>
+        /// Deletes a specific Enrollment
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEnrollment(int id)
         {
@@ -101,6 +124,10 @@ namespace ContosoUniversityBackend.Controllers
         }
         
         // GET: api/EnrollmentDateGroup
+        /// <summary>
+        /// Gets Number of Students grouped by Enrollment Date for About Page
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("DateGroup")]
         public async Task<ActionResult<List<EnrollmentDateGroup>>> About()
         {

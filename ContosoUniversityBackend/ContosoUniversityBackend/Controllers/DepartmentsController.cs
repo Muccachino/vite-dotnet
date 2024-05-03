@@ -21,6 +21,10 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // GET: api/Departments
+        /// <summary>
+        /// Gets a List of all Departments with some nested objects
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DepartmentIndexDto>>> GetDepartments()
         {
@@ -34,6 +38,11 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // GET: api/Departments/5
+        /// <summary>
+        /// Gets a single Department depending on given ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<DepartmentDetailsDto>> GetDepartment(int id)
         {
@@ -63,7 +72,12 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // PUT: api/Departments/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Updates a specific Department in the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="department"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDepartment(int id, DepartmentEditDto department)
         {
@@ -98,7 +112,11 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // POST: api/Departments
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Creates a new Department and saves it to the database
+        /// </summary>
+        /// <param name="departmentDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Department>> PostDepartment(DepartmentCreateDto departmentDto)
         {
@@ -112,6 +130,11 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // DELETE: api/Departments/5
+        /// <summary>
+        /// Deletes a specific Course 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDepartment(int id)
         {

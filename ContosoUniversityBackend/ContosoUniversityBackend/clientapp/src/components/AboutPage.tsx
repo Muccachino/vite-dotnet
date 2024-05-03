@@ -9,7 +9,6 @@ import {IEnrollmentDateGroup} from "../interfaces/global_interfaces.ts";
 
 
 
-
 export default function AboutPage() {
   const [test, setTest] = useState<IEnrollmentDateGroup[]>([]);
 
@@ -24,10 +23,10 @@ export default function AboutPage() {
   return (
     <>
       <Header headerBackground="white" headerColor="black"/>
-      <div>
+      <div style={{margin: "50px 10vw" }}>
         <div>
-          <h1 style={{marginBottom: "20px"}}>About</h1>
-          <h2 style={{marginBottom: "20px"}}>
+          <h1 style={{margin: "20px 20px"}}>About</h1>
+          <h2 style={{margin: "20px 20px"}}>
             Student Body Statistics
           </h2>
           <Divider style={{margin: "40px 0"}}/>

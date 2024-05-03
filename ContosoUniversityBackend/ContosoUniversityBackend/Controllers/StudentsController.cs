@@ -21,6 +21,10 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // GET: api/Students
+        /// <summary>
+        /// Gets a List of all Students with some nested objects
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetStudentsDto>>> GetStudents()
         {
@@ -33,6 +37,11 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // GET: api/Students/5
+        /// <summary>
+        /// Gets a single Student depending on given ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<GetSingleStudentDto>> GetStudent(int id)
         {
@@ -60,7 +69,12 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // PUT: api/Students/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Updates a specific Student in the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="student"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent(int id, EditStudentDto student)
         {
@@ -102,7 +116,11 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // POST: api/Students
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Creates a new Student and saves it to the database
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(CreateStudentDto dto)
         {
@@ -126,6 +144,11 @@ namespace ContosoUniversityBackend.Controllers
         }
 
         // DELETE: api/Students/5
+        /// <summary>
+        /// Deletes a specific Student
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {

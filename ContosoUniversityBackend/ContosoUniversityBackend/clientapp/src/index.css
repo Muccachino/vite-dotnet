@@ -44,11 +44,12 @@
 }
 
 .footer {
+    border-top: 2px solid black;
     position: absolute;
     bottom: 0;
     width: 100vw;
     height: 60px;
-    padding-left: 20vw;
+    padding: 10px 20vw;
 
     a {
         text-decoration: none;
